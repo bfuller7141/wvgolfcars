@@ -1457,6 +1457,8 @@ li {
 .feature-card {
   background-color: var(--wheat-20);
   min-width: 10rem;
+  min-height: 4.5rem;
+  max-height: 4.5rem;
   padding: .5rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 }
