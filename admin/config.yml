@@ -1,0 +1,1839 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: main
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Twitter Image
+            name: twitter:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: inventory
+    label: Golf Carts
+    folder: cms/inventory
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Features
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_serial-number
+        label: Serial Number
+        widget: string
+        required: false
+      - hint: ''
+        name: f_make
+        label: Make
+        widget: string
+        required: false
+      - hint: ''
+        name: f_model
+        label: Model
+        widget: string
+        required: false
+      - hint: ''
+        name: f_trim
+        label: Trim
+        widget: string
+        required: false
+      - hint: ''
+        name: f_year
+        label: Year
+        widget: number
+        required: false
+      - hint: ''
+        name: f_color
+        label: Color
+        widget: string
+        required: false
+      - hint: ''
+        name: f_price
+        label: Price
+        widget: string
+        required: false
+      - hint: ''
+        name: f_passengers
+        label: Passengers
+        widget: number
+        required: false
+      - hint: ''
+        name: f_condition
+        label: Condition
+        widget: select
+        required: false
+        options:
+          - label: New
+            value: New
+          - label: Used
+            value: Used
+      - hint: ''
+        name: f_fuel-type
+        label: Fuel Type
+        widget: select
+        required: false
+        options:
+          - label: Gas
+            value: Gas
+          - label: Electric
+            value: Electric
+          - label: Lead Acid
+            value: Lead Acid
+      - hint: ''
+        name: f_thumbnail
+        label: Thumbnail
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_images
+        label: Images
+        widget: list
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_sold
+        label: Sold
+        widget: boolean
+        required: false
+        default: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: inventory
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[inventory].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: About, key: 3c2336d'
+            label: Text
+            name: 3c2336d
+            widget: string
+          - hint: 'Original text: Inventory, key: -fdc6c4'
+            label: Text
+            name: '-fdc6c4'
+            widget: string
+          - hint: 'Original text: Sales, key: 4bf58ec'
+            label: Text
+            name: 4bf58ec
+            widget: string
+          - hint: 'Original text: Service, key: -2683a16b'
+            label: Text
+            name: '-2683a16b'
+            widget: string
+          - hint: 'Original text: Parts, key: 4952ac0'
+            label: Text
+            name: 4952ac0
+            widget: string
+          - hint: 'Original text: Schedule Service, key: 2f784a2c'
+            label: Text
+            name: 2f784a2c
+            widget: string
+          - hint: 'Original text: Get yourself in the new 2024 , key: -34757473'
+            label: Text
+            name: '-34757473'
+            widget: string
+          - hint: 'Original text: madjax, key: -4079cd2f'
+            label: Text
+            name: '-4079cd2f'
+            widget: string
+          - hint: 'Original text:  x-series, key: 5095518c'
+            label: Text
+            name: 5095518c
+            widget: string
+          - hint: >-
+              Original text: Introducing the latest innovation from the top-tier
+              golf cart parts and accessories brand—a golf cart that not only
+              boasts unmatched style but also offers unparalleled comfort. The
+              MadJax X-Series takes your golfing experience to new heights. With
+              a remarkable 3-year warranty, an all new digital display, and
+              readily available replacement parts and accessories, this
+              exceptional cart ensures that having a blast is effortlessly
+              attainable., key: -43a33e69
+            label: Text
+            name: '-43a33e69'
+            widget: text
+          - hint: 'Original text: Starting at $15,930, key: -2d9c1d3b'
+            label: Text
+            name: '-2d9c1d3b'
+            widget: string
+          - hint: 'Original text: Check Availability, key: -5179824d'
+            label: Text
+            name: '-5179824d'
+            widget: string
+          - hint: 'Original text: Sales , key: -6cd43b4c'
+            label: Text
+            name: '-6cd43b4c'
+            widget: string
+          - hint: 'Original text: •, key: 2022'
+            label: Text
+            name: '2022'
+            widget: string
+          - hint: 'Original text:  Service , key: -2162abb5'
+            label: Text
+            name: '-2162abb5'
+            widget: string
+          - hint: 'Original text:  Parts , key: 2ad79580'
+            label: Text
+            name: 2ad79580
+            widget: string
+          - hint: 'Original text:  Rentals , key: 6fc91671'
+            label: Text
+            name: 6fc91671
+            widget: string
+          - hint: 'Original text:  Storage, key: -10f189c5'
+            label: Text
+            name: '-10f189c5'
+            widget: string
+          - hint: 'Original text: Our Latest Arrivals, key: -617154e1'
+            label: Text
+            name: '-617154e1'
+            widget: string
+          - hint: 'Original text: See All Inventory, key: -4342bd0'
+            label: Text
+            name: '-4342bd0'
+            widget: string
+          - hint: 'Original text: 2023 Madjax X-series, key: -5196d746'
+            label: Text
+            name: '-5196d746'
+            widget: string
+          - hint: 'Original text: $13,999, key: -391ea84d'
+            label: Text
+            name: '-391ea84d'
+            widget: string
+          - hint: 'Original text: Shop This Cart, key: 75e332d8'
+            label: Text
+            name: 75e332d8
+            widget: string
+          - hint: 'Original text: 2023 , key: 2d72b01'
+            label: Text
+            name: 2d72b01
+            widget: string
+          - hint: 'Original text: Madjax, key: -7714e10f'
+            label: Text
+            name: '-7714e10f'
+            widget: string
+          - hint: 'Original text:  X-series , key: 3986fff4'
+            label: Text
+            name: 3986fff4
+            widget: string
+          - hint: >-
+              Original text: Start the new year in the MadJax X-Series and take
+              your golfing experience to new heights. With a remarkable 3-year
+              warranty and readily available replacement parts and accessories,
+              this exceptional cart ensures that having a blast is effortlessly
+              attainable. , key: -1a34aaff
+            label: Text
+            name: '-1a34aaff'
+            widget: text
+          - hint: 'Original text: See all Inventory, key: -33d35bb0'
+            label: Text
+            name: '-33d35bb0'
+            widget: string
+          - hint: 'Original text: Check out our , key: 42d2cc1e'
+            label: Text
+            name: 42d2cc1e
+            widget: string
+          - hint: 'Original text: Current, key: -599baaa7'
+            label: Text
+            name: '-599baaa7'
+            widget: string
+          - hint: 'Original text:  Inventory, key: -77cfa2e4'
+            label: Text
+            name: '-77cfa2e4'
+            widget: string
+          - hint: 'Original text: SOLD, key: 26ecd4'
+            label: Text
+            name: 26ecd4
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: Your Trusted West , key: 3171f29b'
+            label: Text
+            name: 3171f29b
+            widget: string
+          - hint: 'Original text: Valley, key: -67b59881'
+            label: Text
+            name: '-67b59881'
+            widget: string
+          - hint: 'Original text:  Golf Car Dealer, key: -301fcd9d'
+            label: Text
+            name: '-301fcd9d'
+            widget: string
+          - hint: "Original text: New &\_Used Carts, key: -38d65976"
+            label: Text
+            name: '-38d65976'
+            widget: string
+          - hint: 'Original text: Expert Service, key: -68821541'
+            label: Text
+            name: '-68821541'
+            widget: string
+          - hint: 'Original text: Parts & Accessories, key: -a834a'
+            label: Text
+            name: '-a834a'
+            widget: string
+          - hint: 'Original text: Certified , key: 61ccb439'
+            label: Text
+            name: 61ccb439
+            widget: string
+          - hint: 'Original text: dealers, key: 5bd2257a'
+            label: Text
+            name: 5bd2257a
+            widget: string
+          - hint: 'Original text:  of:, key: 103923'
+            label: Text
+            name: '103923'
+            widget: string
+          - hint: >-
+              Original text: Gas cart or electric cart We've got , key:
+              -6aa23213
+            label: Text
+            name: '-6aa23213'
+            widget: string
+          - hint: 'Original text: your, key: 38b033'
+            label: Text
+            name: 38b033
+            widget: string
+          - hint: 'Original text:  back!, key: 3c2dabfa'
+            label: Text
+            name: 3c2dabfa
+            widget: string
+          - hint: >-
+              Original text: Whether you're cruising in a classic gas-powered
+              cart or a sleek electric ride, we've got the know-how to keep your
+              cart running like a dream. We specialize in both gas and electric
+              golf carts, offering comprehensive service solutions designed to
+              meet your specific needs. From routine maintenance to more complex
+              repairs, you can trust us to keep your golf cart running
+              smoothly., key: 24272947
+            label: Text
+            name: '24272947'
+            widget: text
+          - hint: 'Original text: Gas Cart Services, key: -5afddfc9'
+            label: Text
+            name: '-5afddfc9'
+            widget: string
+          - hint: >-
+              Original text: From tune-ups to repairs, our gas cart service
+              ensures your ride performs at its best, no matter the terrain.,
+              key: 6b8c9c11
+            label: Text
+            name: 6b8c9c11
+            widget: text
+          - hint: 'Original text: More about service, key: 6393dbb7'
+            label: Text
+            name: 6393dbb7
+            widget: string
+          - hint: 'Original text: Electric Cart Services, key: 30cd6bbb'
+            label: Text
+            name: 30cd6bbb
+            widget: string
+          - hint: >-
+              Original text: Battery maintenance, motor repairs, and more, our
+              electric cart service keeps your cart running smoothly., key:
+              -e3391fc
+            label: Text
+            name: '-e3391fc'
+            widget: text
+          - hint: 'Original text: Testimonials, key: 1590c3d4'
+            label: Text
+            name: 1590c3d4
+            widget: string
+          - hint: 'Original text: What our customers are saying, key: 75e68e1e'
+            label: Text
+            name: 75e68e1e
+            widget: string
+          - hint: 'Original text: ★★★★★, key: 299f74c5'
+            label: Text
+            name: 299f74c5
+            widget: string
+          - hint: >-
+              Original text: These guys are awesome came picked up my cart that
+              would not run they fixed it and brought it back next running
+              perfect and for a reasonable price thank you West Valley Golf
+              Carts., key: 4ea4c5e9
+            label: Text
+            name: 4ea4c5e9
+            widget: text
+          - hint: 'Original text: Randy G., key: 12ca9793'
+            label: Text
+            name: 12ca9793
+            widget: string
+          - hint: >-
+              Original text: Fantastic experience. Picked up cart at 7am and
+              returned at noon. Exceeded expectations. Will now have them doing
+              yearly maintenance going forward., key: 4927e794
+            label: Text
+            name: '4927e794'
+            widget: text
+          - hint: 'Original text: Lance D., key: -5c93a4f1'
+            label: Text
+            name: '-5c93a4f1'
+            widget: string
+          - hint: >-
+              Original text: West Valley Golf Cars deserves every bit of this
+              5-star review. They're friendly, helpful, and passionate approach
+              to serving their customers is unparalleled., key: 2d8e532b
+            label: Text
+            name: 2d8e532b
+            widget: text
+          - hint: 'Original text: Brandon F., key: -3664a07e'
+            label: Text
+            name: '-3664a07e'
+            widget: string
+          - hint: 'Original text: Let''s Get you into your , key: -9cbf24f'
+            label: Text
+            name: '-9cbf24f'
+            widget: string
+          - hint: 'Original text: dream, key: 5b68803'
+            label: Text
+            name: 5b68803
+            widget: string
+          - hint: 'Original text:  cart today, key: -454a519f'
+            label: Text
+            name: '-454a519f'
+            widget: string
+          - hint: >-
+              Original text: Ready to find your perfect golf cart? Enter your
+              email below and select the services you're interested in, and a
+              West Valley Golf Cars representative will be in touch with you
+              shortly., key: -601eee02
+            label: Text
+            name: '-601eee02'
+            widget: text
+          - hint: 'Original text: First Name , key: -33504ebb'
+            label: Text
+            name: '-33504ebb'
+            widget: string
+          - hint: 'Original text: *, key: 2a'
+            label: Text
+            name: 2a
+            widget: string
+          - hint: 'Original text: Last Name , key: -6eb65f15'
+            label: Text
+            name: '-6eb65f15'
+            widget: string
+          - hint: 'Original text: Phone Number, key: -55f81185'
+            label: Text
+            name: '-55f81185'
+            widget: string
+          - hint: 'Original text: Email Address , key: -42920910'
+            label: Text
+            name: '-42920910'
+            widget: string
+          - hint: 'Original text: What Can We Help You With? , key: -4930517f'
+            label: Text
+            name: '-4930517f'
+            widget: string
+          - hint: 'Original text: Select one..., key: 57f3b1cc'
+            label: Text
+            name: 57f3b1cc
+            widget: string
+          - hint: 'Original text: Rentals, key: -5ba34051'
+            label: Text
+            name: '-5ba34051'
+            widget: string
+          - hint: 'Original text: Storage, key: -d1725a5'
+            label: Text
+            name: '-d1725a5'
+            widget: string
+          - hint: 'Original text: Additional Information, key: 7f606ab3'
+            label: Text
+            name: 7f606ab3
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: Company, key: -64202ba3'
+            label: Text
+            name: '-64202ba3'
+            widget: string
+          - hint: 'Original text: About Us, key: 645efc51'
+            label: Text
+            name: 645efc51
+            widget: string
+          - hint: 'Original text: Schedule A Service, key: 41b18b8d'
+            label: Text
+            name: 41b18b8d
+            widget: string
+          - hint: 'Original text: Contact Us, key: 7f2746de'
+            label: Text
+            name: 7f2746de
+            widget: string
+          - hint: 'Original text: (623) 882-0222, key: 105f92a3'
+            label: Text
+            name: 105f92a3
+            widget: string
+          - hint: 'Original text: info@westvalleygolfcars.com, key: 69a95d34'
+            label: Text
+            name: 69a95d34
+            widget: string
+          - hint: 'Original text: 6205 N Sarival Ave, key: -7ef6f885'
+            label: Text
+            name: '-7ef6f885'
+            widget: string
+          - hint: "Original text: Litchfield Park, AZ\_85340, key: 2072e6ab"
+            label: Text
+            name: 2072e6ab
+            widget: string
+          - hint: >-
+              Original text: © 2023. West Valley Golf Cars. Developed by Tripass
+              Design, key: 3def0150
+            label: Text
+            name: 3def0150
+            widget: string
+          - hint: 'Original text: Follow Us On Instagram, key: 20caee84'
+            label: Text
+            name: 20caee84
+            widget: string
+          - hint: 'Original text: 2024 , key: 2d72b20'
+            label: Text
+            name: 2d72b20
+            widget: string
+          - hint: 'Original text:  X-series at West Valley Golf Cars, key: -6337ad4c'
+            label: Text
+            name: '-6337ad4c'
+            widget: string
+          - hint: 'Original text: Learn More At Madjax.com, key: -64b0f6fe'
+            label: Text
+            name: '-64b0f6fe'
+            widget: string
+          - hint: 'Original text: Our Current Inventory, key: 1cb71f41'
+            label: Text
+            name: 1cb71f41
+            widget: string
+          - hint: >-
+              Original text: We strive to reflect the most accurate current
+              pricing on our website. However, there may be errors, price
+              changes, or other discrepancies. Please inquire with our sales
+              team to obtain the most accurate and up-to-date pricing
+              information., key: -2410a5a0
+            label: Text
+            name: '-2410a5a0'
+            widget: text
+          - hint: 'Original text: Your Home Of The West Valley , key: -68b0ffcc'
+            label: Text
+            name: '-68b0ffcc'
+            widget: string
+          - hint: 'Original text: Edition, key: -d4f7262'
+            label: Text
+            name: '-d4f7262'
+            widget: string
+          - hint: 'Original text:  Golf Car, key: 5cd5736'
+            label: Text
+            name: 5cd5736
+            widget: string
+          - hint: >-
+              Original text: Every West Valley Edition Golf Cart is thoughtfully
+              reconstructed from the foundation up, merging exceptional
+              craftsmanship with cutting-edge features for a ride that's in a
+              class of its own. Boasting striking aesthetics and seamless
+              performance, this edition offers more than a simple trip—it
+              delivers an adventure rich in comfort and elegance. Whether you're
+              navigating the fairways or enjoying a leisurely drive in your
+              community, the West Valley Edition Golf Cart is crafted to turn
+              every journey into an unforgettable experience., key: 515e0c94
+            label: Text
+            name: 515e0c94
+            widget: text
+          - hint: 'Original text: Contact Sales for More information, key: 57fcc64c'
+            label: Text
+            name: 57fcc64c
+            widget: string
+          - hint: 'Original text: Expert , key: 152d6f16'
+            label: Text
+            name: 152d6f16
+            widget: string
+          - hint: 'Original text: Care, key: 1fef31'
+            label: Text
+            name: 1fef31
+            widget: string
+          - hint: 'Original text:  for your gas or electric carts, key: 3c4a9890'
+            label: Text
+            name: 3c4a9890
+            widget: string
+          - hint: >-
+              Original text: Keep your golf cart running at its best with our
+              professional service team at West Valley Golf Cars. From routine
+              maintenance to complex repairs, our experts bring years of
+              experience and a passion for precision to every task. We
+              understand the importance of your golf cart's performance and
+              reliability, whether you're on the course or on the move. Trust us
+              to deliver top-notch service with a focus on quality, efficiency,
+              and customer satisfaction. Let us take the hassle out of
+              maintaining your cart, so you can focus on enjoying the ride.,
+              key: -662f02d3
+            label: Text
+            name: '-662f02d3'
+            widget: text
+          - hint: 'Original text: Schedule Your Service Today, key: 4ee0a8d2'
+            label: Text
+            name: 4ee0a8d2
+            widget: string
+          - hint: 'Original text: Multi-Point Inspection., key: -7ff5d4a'
+            label: Text
+            name: '-7ff5d4a'
+            widget: string
+          - hint: >-
+              Original text: Check tires and inflate to proper PSI., key:
+              -429a3dfe
+            label: Text
+            name: '-429a3dfe'
+            widget: string
+          - hint: 'Original text: Change oil and oil filter., key: -d6a9fff'
+            label: Text
+            name: '-d6a9fff'
+            widget: string
+          - hint: 'Original text: Change fuel filter and air filter., key: -31dbf137'
+            label: Text
+            name: '-31dbf137'
+            widget: string
+          - hint: 'Original text: adjust or replace spark plugs., key: -5ec526bc'
+            label: Text
+            name: '-5ec526bc'
+            widget: string
+          - hint: 'Original text: Inspect and test battery., key: 200e05da'
+            label: Text
+            name: 200e05da
+            widget: string
+          - hint: >-
+              Original text: Brake inspection, cleaning and adjustment., key:
+              -27b82bb2
+            label: Text
+            name: '-27b82bb2'
+            widget: string
+          - hint: >-
+              Original text: Check suspension points, and grease all fittings.,
+              key: 7fd2407f
+            label: Text
+            name: 7fd2407f
+            widget: string
+          - hint: 'Original text: Pressure wash cart., key: -764f4718'
+            label: Text
+            name: '-764f4718'
+            widget: string
+          - hint: 'Original text: Clean battery terminals., key: 590148e1'
+            label: Text
+            name: '590148e1'
+            widget: string
+          - hint: 'Original text: inspect cables and connections., key: -3005d9e0'
+            label: Text
+            name: '-3005d9e0'
+            widget: string
+          - hint: 'Original text: Balance battery cells., key: -6c5a85ac'
+            label: Text
+            name: '-6c5a85ac'
+            widget: string
+          - hint: 'Original text: Clean battery housing., key: 7b6081bb'
+            label: Text
+            name: 7b6081bb
+            widget: string
+          - hint: 'Original text: Pressure Wash Cart, key: 18bbdc06'
+            label: Text
+            name: 18bbdc06
+            widget: string
+          - hint: 'Original text: Ask , key: 1f48e7'
+            label: Text
+            name: 1f48e7
+            widget: string
+          - hint: 'Original text: about, key: 585238d'
+            label: Text
+            name: 585238d
+            widget: string
+          - hint: 'Original text:  our pick-up & Delivery services, key: -29f7ab5d'
+            label: Text
+            name: '-29f7ab5d'
+            widget: string
+          - hint: >-
+              Original text: At West Valley Golf Cars, we're committed to making
+              your service experience as effortless as possible. That's why we
+              offer a convenient pick-up and delivery service for your golf
+              cart. Whether you need maintenance, repairs, or any other service,
+              we'll come to you. Our goal is to provide you with hassle-free
+              support, ensuring your golf cart gets the care it needs without
+              disrupting your schedule. Some charges may apply for this service,
+              but we strive to keep them reasonable and will always be upfront
+              about any costs involved., key: -4923e54f
+            label: Text
+            name: '-4923e54f'
+            widget: text
+          - hint: 'Original text: Schedule Your Carts Service Today, key: 151913a5'
+            label: Text
+            name: 151913a5
+            widget: string
+          - hint: >-
+              Original text: Schedule your carts service today by filling out
+              the form below. We will be in contact with you as soon!, key:
+              -7d8046fe
+            label: Text
+            name: '-7d8046fe'
+            widget: text
+          - hint: 'Original text: Name , key: 478e6d5'
+            label: Text
+            name: 478e6d5
+            widget: string
+          - hint: 'Original text: Today''s Date , key: 37c89c3f'
+            label: Text
+            name: 37c89c3f
+            widget: string
+          - hint: 'Original text: Have we worked with you before? , key: -5dd376bb'
+            label: Text
+            name: '-5dd376bb'
+            widget: string
+          - hint: 'Original text: Yes, key: 15ac7'
+            label: Text
+            name: 15ac7
+            widget: string
+          - hint: 'Original text: No, key: 9e1'
+            label: Text
+            name: '9e1'
+            widget: string
+          - hint: 'Original text: I''m not sure..., key: 2f26ea7b'
+            label: Text
+            name: 2f26ea7b
+            widget: string
+          - hint: 'Original text: How did you hear about us?, key: -54a28412'
+            label: Text
+            name: '-54a28412'
+            widget: string
+          - hint: 'Original text: Website, key: -53cd8785'
+            label: Text
+            name: '-53cd8785'
+            widget: string
+          - hint: 'Original text: Referral, key: -27372043'
+            label: Text
+            name: '-27372043'
+            widget: string
+          - hint: 'Original text: Social Media, key: 3eb4f971'
+            label: Text
+            name: 3eb4f971
+            widget: string
+          - hint: 'Original text: Google, key: 7f784a59'
+            label: Text
+            name: 7f784a59
+            widget: string
+          - hint: 'Original text: Other, key: 48f8ef0'
+            label: Text
+            name: 48f8ef0
+            widget: string
+          - hint: 'Original text: Phone Number , key: -690a1efb'
+            label: Text
+            name: '-690a1efb'
+            widget: string
+          - hint: 'Original text: Email , key: 7bec1424'
+            label: Text
+            name: 7bec1424
+            widget: string
+          - hint: 'Original text: Address , key: -44c9b934'
+            label: Text
+            name: '-44c9b934'
+            widget: string
+          - hint: 'Original text: City , key: 3e1a3f5'
+            label: Text
+            name: 3e1a3f5
+            widget: string
+          - hint: 'Original text: State , key: -6bcd4631'
+            label: Text
+            name: '-6bcd4631'
+            widget: string
+          - hint: 'Original text: Alabama, key: 2c455c89'
+            label: Text
+            name: 2c455c89
+            widget: string
+          - hint: 'Original text: Alaska, key: 750abfd3'
+            label: Text
+            name: 750abfd3
+            widget: string
+          - hint: 'Original text: Arizona, key: 36fe49e0'
+            label: Text
+            name: 36fe49e0
+            widget: string
+          - hint: 'Original text: Arkansas, key: -552c0962'
+            label: Text
+            name: '-552c0962'
+            widget: string
+          - hint: 'Original text: California, key: 56f3e2d8'
+            label: Text
+            name: 56f3e2d8
+            widget: string
+          - hint: 'Original text: Colorado, key: -21a0b177'
+            label: Text
+            name: '-21a0b177'
+            widget: string
+          - hint: 'Original text: Connecticut, key: -35cb26fd'
+            label: Text
+            name: '-35cb26fd'
+            widget: string
+          - hint: 'Original text: Delaware, key: 347f2953'
+            label: Text
+            name: 347f2953
+            widget: string
+          - hint: 'Original text: Florida, key: 359130bd'
+            label: Text
+            name: 359130bd
+            widget: string
+          - hint: 'Original text: Georgia, key: 5e8578be'
+            label: Text
+            name: 5e8578be
+            widget: string
+          - hint: 'Original text: Hawaii, key: -7f9499fd'
+            label: Text
+            name: '-7f9499fd'
+            widget: string
+          - hint: 'Original text: Idaho, key: 433a20d'
+            label: Text
+            name: 433a20d
+            widget: string
+          - hint: 'Original text: Illinois, key: -51627f55'
+            label: Text
+            name: '-51627f55'
+            widget: string
+          - hint: 'Original text: Indiana, key: -28f1a2f6'
+            label: Text
+            name: '-28f1a2f6'
+            widget: string
+          - hint: 'Original text: Iowa, key: 22de90'
+            label: Text
+            name: 22de90
+            widget: string
+          - hint: 'Original text: Kansas, key: -7a79e4d3'
+            label: Text
+            name: '-7a79e4d3'
+            widget: string
+          - hint: 'Original text: Kentucky, key: 101bf13c'
+            label: Text
+            name: 101bf13c
+            widget: string
+          - hint: 'Original text: Louisiana, key: -a20e559'
+            label: Text
+            name: '-a20e559'
+            widget: string
+          - hint: 'Original text: Maine, key: 46ac1ac'
+            label: Text
+            name: 46ac1ac
+            widget: string
+          - hint: 'Original text: Maryland, key: 135b1766'
+            label: Text
+            name: 135b1766
+            widget: string
+          - hint: 'Original text: Massachusetts, key: -12d78d82'
+            label: Text
+            name: '-12d78d82'
+            widget: string
+          - hint: 'Original text: Michigan, key: -5ffc9794'
+            label: Text
+            name: '-5ffc9794'
+            widget: string
+          - hint: 'Original text: Minnesota, key: -4fa76f4e'
+            label: Text
+            name: '-4fa76f4e'
+            widget: string
+          - hint: 'Original text: Mississippi, key: -43003733'
+            label: Text
+            name: '-43003733'
+            widget: string
+          - hint: 'Original text: Missouri, key: -44111a47'
+            label: Text
+            name: '-44111a47'
+            widget: string
+          - hint: 'Original text: Montana, key: -5311f234'
+            label: Text
+            name: '-5311f234'
+            widget: string
+          - hint: 'Original text: Nebraska, key: 332045ef'
+            label: Text
+            name: 332045ef
+            widget: string
+          - hint: 'Original text: Nevada, key: -751f9d41'
+            label: Text
+            name: '-751f9d41'
+            widget: string
+          - hint: 'Original text: New Hampshire, key: -3043e3b5'
+            label: Text
+            name: '-3043e3b5'
+            widget: string
+          - hint: 'Original text: New Jersey, key: 57def930'
+            label: Text
+            name: 57def930
+            widget: string
+          - hint: 'Original text: New Mexico, key: 5d001775'
+            label: Text
+            name: 5d001775
+            widget: string
+          - hint: 'Original text: New York, key: 526ed28f'
+            label: Text
+            name: 526ed28f
+            widget: string
+          - hint: 'Original text: North Carolina, key: -1479bd7a'
+            label: Text
+            name: '-1479bd7a'
+            widget: string
+          - hint: 'Original text: North Dakota, key: 28d4f889'
+            label: Text
+            name: 28d4f889
+            widget: string
+          - hint: 'Original text: Ohio, key: 257cdf'
+            label: Text
+            name: 257cdf
+            widget: string
+          - hint: 'Original text: Oklahoma, key: -17752334'
+            label: Text
+            name: '-17752334'
+            widget: string
+          - hint: 'Original text: Oregon, key: -72bb357c'
+            label: Text
+            name: '-72bb357c'
+            widget: string
+          - hint: 'Original text: Pennsylvania, key: 3ca5a60a'
+            label: Text
+            name: 3ca5a60a
+            widget: string
+          - hint: 'Original text: Rhode Island, key: -19e5fe05'
+            label: Text
+            name: '-19e5fe05'
+            widget: string
+          - hint: 'Original text: South Carolina, key: 6bf022be'
+            label: Text
+            name: 6bf022be
+            widget: string
+          - hint: 'Original text: South Dakota, key: 2c2986c1'
+            label: Text
+            name: 2c2986c1
+            widget: string
+          - hint: 'Original text: Tennessee, key: 1eb2f374'
+            label: Text
+            name: 1eb2f374
+            widget: string
+          - hint: 'Original text: Texas, key: 4cf6e79'
+            label: Text
+            name: 4cf6e79
+            widget: string
+          - hint: 'Original text: Utah, key: 286326'
+            label: Text
+            name: '286326'
+            widget: string
+          - hint: 'Original text: Vermont, key: 782b10eb'
+            label: Text
+            name: 782b10eb
+            widget: string
+          - hint: 'Original text: Virginia, key: 6078b145'
+            label: Text
+            name: 6078b145
+            widget: string
+          - hint: 'Original text: Washington, key: 13fe41b0'
+            label: Text
+            name: 13fe41b0
+            widget: string
+          - hint: 'Original text: West Virginia, key: -6b586b8a'
+            label: Text
+            name: '-6b586b8a'
+            widget: string
+          - hint: 'Original text: Wisconsin, key: 71497317'
+            label: Text
+            name: '71497317'
+            widget: string
+          - hint: 'Original text: Wyoming, key: -30f8247e'
+            label: Text
+            name: '-30f8247e'
+            widget: string
+          - hint: 'Original text: Vehicle Information, key: -1f4d4208'
+            label: Text
+            name: '-1f4d4208'
+            widget: string
+          - hint: 'Original text: Make , key: 46ac7d2'
+            label: Text
+            name: 46ac7d2
+            widget: string
+          - hint: 'Original text: Model, key: 4710b09'
+            label: Text
+            name: 4710b09
+            widget: string
+          - hint: 'Original text: Year , key: 5158f63'
+            label: Text
+            name: 5158f63
+            widget: string
+          - hint: 'Original text: Can you briefly explain the issue? , key: -7d225f08'
+            label: Text
+            name: '-7d225f08'
+            widget: string
+          - hint: 'Original text: Is there timeframe for completion? , key: -7f6c74ba'
+            label: Text
+            name: '-7f6c74ba'
+            widget: string
+          - hint: >-
+              Original text: Are you willing to wait past this date? , key:
+              -5282a5a
+            label: Text
+            name: '-5282a5a'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received, and
+              one of our team members will be in touch with you shortly!, key:
+              2c88110a
+            label: Text
+            name: 2c88110a
+            widget: text
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form. If the issue continues to persist, please reach out to ,
+              key: 584feee7
+            label: Text
+            name: 584feee7
+            widget: text
+          - hint: 'Original text:  info@wvgolfcars.com, key: -18c6c55b'
+            label: Text
+            name: '-18c6c55b'
+            widget: string
+          - hint: 'Original text: Find the , key: -7262ec4a'
+            label: Text
+            name: '-7262ec4a'
+            widget: string
+          - hint: 'Original text: Perfect, key: 3ac257ed'
+            label: Text
+            name: 3ac257ed
+            widget: string
+          - hint: 'Original text:  Parts for Your Golf Cart, key: 34274e48'
+            label: Text
+            name: '34274e48'
+            widget: string
+          - hint: >-
+              Original text: At West Valley Golf Cars, we understand the
+              importance of keeping your golf cart in top condition. Our
+              knowledgeable team is here to help you identify and source the
+              right parts for any repair or upgrade. From batteries and tires to
+              custom accessories, we have the expertise to guide you through the
+              selection process, ensuring you get exactly what you need. Our
+              commitment is to provide you with unparalleled support and advice,
+              making it easy for you to maintain and enhance your golf cart's
+              performance and appearance., key: 2550d492
+            label: Text
+            name: 2550d492
+            widget: text
+          - hint: 'Original text: Contact Us Today, key: 5530eb5f'
+            label: Text
+            name: 5530eb5f
+            widget: string
+          - hint: 'Original text: Ask our team , key: 581fee88'
+            label: Text
+            name: 581fee88
+            widget: string
+          - hint: 'Original text:  The Eco-Battery Lithium, key: -2bfeb9ae'
+            label: Text
+            name: '-2bfeb9ae'
+            widget: string
+          - hint: >-
+              Original text: Eco Battery stands at the forefront of sustainable,
+              high-performance energy solutions, providing reliable power that
+              enhances your golf cart's efficiency and longevity. With 10x the
+              life span, 3x smaller footprint, and 5x lighter than lead acid
+              batteries, you can spend more time enjoying your golf cart and
+              less time worrying about charge! Let us help you make the switch
+              to a more reliable power source with Eco Battery., key: -6ddb8a3a
+            label: Text
+            name: '-6ddb8a3a'
+            widget: text
+          - hint: 'Original text: More about Eco Battery, key: 1cb0b440'
+            label: Text
+            name: 1cb0b440
+            widget: string
+          - hint: 'Original text: Let''s Help you Find the , key: -407f7931'
+            label: Text
+            name: '-407f7931'
+            widget: string
+          - hint: 'Original text: parts, key: 6581ae0'
+            label: Text
+            name: 6581ae0
+            widget: string
+          - hint: 'Original text:  you need, key: 5b6d4017'
+            label: Text
+            name: 5b6d4017
+            widget: string
+          - hint: >-
+              Original text: Looking for parts for your golf cart? Enter your
+              contact information below and briefly describe what you are
+              looking for, and a West Valley Golf Cars representative will be in
+              touch with you shortly., key: 50ba177c
+            label: Text
+            name: 50ba177c
+            widget: text
+          - hint: 'Original text: Proudly , key: -3711d329'
+            label: Text
+            name: '-3711d329'
+            widget: string
+          - hint: 'Original text: serving, key: 7643c80c'
+            label: Text
+            name: 7643c80c
+            widget: string
+          - hint: 'Original text:  the West Valley Since 2000, key: -316f6e1d'
+            label: Text
+            name: '-316f6e1d'
+            widget: string
+          - hint: >-
+              Original text: At West Valley Golf Cars, we are dedicated to
+              providing exceptional golf cart solutions that go beyond
+              expectations. With a passion for excellence and a commitment to
+              customer satisfaction, we strive to deliver top-notch products,
+              expert service, and a personalized experience. Our team of
+              knowledgeable professionals is here to assist you in finding the
+              perfect golf cart to suit your needs, whether it's for leisurely
+              rides on the green or transportation within you community., key:
+              -37593ae
+            label: Text
+            name: '-37593ae'
+            widget: text
+          - hint: 'Original text: A History rich with Serving our , key: 17c5c9'
+            label: Text
+            name: 17c5c9
+            widget: string
+          - hint: 'Original text: amazing, key: -35335ba3'
+            label: Text
+            name: '-35335ba3'
+            widget: string
+          - hint: 'Original text:  customers, key: -16c35fcb'
+            label: Text
+            name: '-16c35fcb'
+            widget: string
+          - hint: >-
+              Original text: At West Valley Golf Cars, we take pride in our rich
+              history of serving our amazing customers. Since our establishment,
+              we have been dedicated to providing exceptional products and
+              services that exceed expectations., key: -550218d1
+            label: Text
+            name: '-550218d1'
+            widget: text
+          - hint: >-
+              Original text: Over the years, we have built strong relationships
+              with our valued customers, understanding their unique needs and
+              ensuring their complete satisfaction. From our humble beginnings
+              to becoming a trusted name in the industry, our success is a
+              testament to the loyalty and support of our amazing customers. As
+              we continue to grow, we remain committed to upholding our legacy
+              of excellence, innovation, and outstanding customer service., key:
+              -37b5ba9a
+            label: Text
+            name: '-37b5ba9a'
+            widget: text
+          - hint: 'Original text: Meet The , key: 3b1e5208'
+            label: Text
+            name: 3b1e5208
+            widget: string
+          - hint: 'Original text: great, key: 5e0ce8d'
+            label: Text
+            name: 5e0ce8d
+            widget: string
+          - hint: 'Original text:  team behind west valley golf cars, key: -4f758b6'
+            label: Text
+            name: '-4f758b6'
+            widget: string
+          - hint: >-
+              Original text: At the heart of West Valley Golf Cars is a team of
+              seasoned professionals, each bringing years of expertise and a
+              genuine passion for the golf cart industry to the table. Our staff
+              is not just skilled in the mechanics and nuances of golf carts;
+              they're dedicated problem solvers committed to providing solutions
+              that meet your specific needs. Whether you're seeking the perfect
+              custom build, need expert advice on maintenance, or are navigating
+              the selection of the right parts, our team is here to guide you
+              every step of the way., key: 2e8ec58a
+            label: Text
+            name: 2e8ec58a
+            widget: text
+          - hint: 'Original text: Model Year, key: -f39a0ec'
+            label: Text
+            name: '-f39a0ec'
+            widget: string
+          - hint: 'Original text: Passangers, key: -61c64743'
+            label: Text
+            name: '-61c64743'
+            widget: string
+          - hint: 'Original text: Color, key: 3e43f43'
+            label: Text
+            name: 3e43f43
+            widget: string
+          - hint: 'Original text: Drivetrain, key: -65986522'
+            label: Text
+            name: '-65986522'
+            widget: string
+          - hint: 'Original text: Condition, key: 441b8cfb'
+            label: Text
+            name: 441b8cfb
+            widget: string
+          - hint: 'Original text: Price, key: 49cc129'
+            label: Text
+            name: 49cc129
+            widget: string
+          - hint: 'Original text: Contact Us About This Cart, key: 734f5d2d'
+            label: Text
+            name: 734f5d2d
+            widget: string
+          - hint: 'Original text: Check out , key: 547306ca'
+            label: Text
+            name: 547306ca
+            widget: string
+          - hint: 'Original text: More, key: 24af75'
+            label: Text
+            name: 24af75
+            widget: string
+          - hint: 'Original text:  of our Carts, key: -70b60b8a'
+            label: Text
+            name: '-70b60b8a'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: /sales/, key: -7ff4466e'
+            label: Link
+            name: '-7ff4466e'
+            widget: string
+          - hint: 'Original link: /service/, key: -753a8eb7'
+            label: Link
+            name: '-753a8eb7'
+            widget: string
+          - hint: 'Original link: /parts/, key: 7af0223e'
+            label: Link
+            name: 7af0223e
+            widget: string
+          - hint: 'Original link: /about/, key: 61642f31'
+            label: Link
+            name: 61642f31
+            widget: string
+          - hint: 'Original link: /service#service-form, key: 490bce99'
+            label: Link
+            name: 490bce99
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:info@westvalleygolfcars.com?subject=Is%20the%202024%20MadJax%20X-Series%20Available%3F,
+              key: -a387570
+            label: Link
+            name: '-a387570'
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:info@westvalleygolfcars.com?subject=Are%20there%202023%20MadJax%20models%20still%20available%3F,
+              key: 77e242a3
+            label: Link
+            name: 77e242a3
+            widget: string
+          - hint: 'Original link: /service#service-info, key: 490d2683'
+            label: Link
+            name: 490d2683
+            widget: string
+          - hint: 'Original link: /service/#service-form, key: -25ce1e2a'
+            label: Link
+            name: '-25ce1e2a'
+            widget: string
+          - hint: 'Original link: tel:(623)882-0222, key: -59f47168'
+            label: Link
+            name: '-59f47168'
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:info@westvalleygolfcars.com?subject=Reaching%20Out!, key:
+              -4a6939dd
+            label: Link
+            name: '-4a6939dd'
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.google.com/maps/dir//west+valley+golf+cars/@33.5745678,-112.454502,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x872b463e5cd19189:0x641d9f9b57df26be!2m2!1d-112.4091426!2d33.5258376?entry=ttu,
+              key: cd6a104
+            label: Link
+            name: cd6a104
+            widget: string
+          - hint: 'Original link: http://www.tripassdesign.com, key: -47ac18dc'
+            label: Link
+            name: '-47ac18dc'
+            widget: string
+          - hint: >-
+              Original link: http://instagram.com/westvalleygolfcars, key:
+              7446dd6b
+            label: Link
+            name: 7446dd6b
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:info@westvalleygolfcars.com?subject=Do%20you%20have%20any%202024%20MadJax%20X-Series'%20in%20stock%3F,
+              key: -5cdbdb51
+            label: Link
+            name: '-5cdbdb51'
+            widget: string
+          - hint: 'Original link: https://madjax.com/, key: 577c9d9c'
+            label: Link
+            name: 577c9d9c
+            widget: string
+          - hint: 'Original link: #sales-form, key: -4113e2b8'
+            label: Link
+            name: '-4113e2b8'
+            widget: string
+          - hint: 'Original link: #service-form, key: -5166cb81'
+            label: Link
+            name: '-5166cb81'
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:info@wvgolfcars.com?subject=I%20would%20like%20to%20schedule%20a%20service%20appointment%20,
+              key: -6e6df6d7
+            label: Link
+            name: '-6e6df6d7'
+            widget: string
+          - hint: 'Original link: #parts-form, key: 6ad44ff4'
+            label: Link
+            name: 6ad44ff4
+            widget: string
+          - hint: 'Original link: https://ecobattery.com/s/, key: -25845cb3'
+            label: Link
+            name: '-25845cb3'
+            widget: string
+          - hint: 'Original link: #contact, key: 6c80469d'
+            label: Link
+            name: 6c80469d
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:lbray@westvalleygolfcars.com?subject=Is%20this%20cart%20still%20available%3F,
+              key: 5f30b747
+            label: Link
+            name: 5f30b747
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: '61945623'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i269a1923
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i677ed781
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5463a070
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: c4a4d59
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: b25b1fc
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-67e66ad8'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-a73b9eb'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 317f733b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 448536e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3627fd61
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 64f6e16c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-28cbf1b7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 32d576d6
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 391b5ec4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7f8d6676
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 50f442df
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4c10f817
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: fd373b3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 12dbaf75
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 33c8b9b3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1f8299d7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
