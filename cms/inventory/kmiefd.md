@@ -11,14 +11,14 @@ f_price: $14,500
 f_passengers: 2
 f_condition: Used
 f_thumbnail:
-  url: https://uploads-ssl.webflow.com/666b2f6de81b7bad5b3e8b1e/6682c2767517810ea39009fb_coming-soon.webp
+  url: /assets/images/img_2829.jpg
   alt: null
 layout: "[inventory].html"
 slug: kmiefd
 f_fuel-type: Electric
 f_images:
-  - url: https://uploads-ssl.webflow.com/666b2f6de81b7bad5b3e8b1e/6682c2767517810ea39009fb_coming-soon.webp
-    alt: null
+  - url: /assets/images/img_2830.jpg
+  - url: /assets/images/img_2831.jpg
 f_sold: true
 tags: inventory
 date: 2024-07-09T14:07:00.000Z
