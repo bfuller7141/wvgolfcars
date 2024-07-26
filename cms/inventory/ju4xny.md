@@ -1,29 +1,27 @@
 ---
-f_sold: false
-f_fuel-type: Electric
-f_passengers: 4
-f_condition: Used
-f_year: 2014
+title: 2014 Club Car
+created-on: 2024-07-01T15:00:52.960Z
+updated-on: 2024-07-01T15:11:03.084Z
+published-on: 2024-07-01T15:20:38.454Z
+f_make: Club Car
+f_model: Precident
 f_trim: Woody
+f_year: 2014
 f_color: Orange
 f_price: $5,750
-f_model: Precident
-title: 2014 Club Car
-f_make: Club Car
-slug: ju4xny
+f_passengers: 4
+f_condition: Used
 f_thumbnail:
-  url: >-
-    https://uploads-ssl.webflow.com/666b2f6de81b7bad5b3e8b1e/6682c2767517810ea39009fb_coming-soon.webp
+  url: /assets/images/img_2825.jpg
   alt: null
+layout: "[inventory].html"
+slug: ju4xny
+f_fuel-type: Electric
 f_images:
-  - url: >-
-      https://uploads-ssl.webflow.com/666b2f6de81b7bad5b3e8b1e/6682c2767517810ea39009fb_coming-soon.webp
-    alt: null
-updated-on: '2024-07-01T15:11:03.084Z'
-created-on: '2024-07-01T15:00:52.960Z'
-published-on: '2024-07-01T15:20:38.454Z'
-layout: '[inventory].html'
+  - url: /assets/images/img_2826.jpg
+f_sold: false
 tags: inventory
+date: 2024-07-26T13:04:00.000Z
 ---
 
 Meet the 2014 Orange "Woody" Club Car Precedent, a unique and stylish golf cart perfect for both the golf course and neighborhood streets. With custom upholstery and a versatile flip seat with a golf holder, this cart combines functionality and performance, reaching speeds over 20 mph.
