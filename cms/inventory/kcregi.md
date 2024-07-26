@@ -11,16 +11,14 @@ f_price: $3,800
 f_passengers: 2
 f_condition: Used
 f_thumbnail:
-  url: /assets/images/img_0049-2-.heic
+  url: /assets/images/img_3061.jpg
   alt: null
 layout: "[inventory].html"
 slug: kcregi
 f_fuel-type: Electric
 f_images:
-  - url: /assets/images/img_0049-2-.heic
-    alt: null
-  - url: /assets/images/img_0050-2-.heic
-  - url: /assets/images/img_0051-2-.heic
+  - url: /assets/images/img_3061.jpg
+  - url: /assets/images/img_3062.jpg
 f_sold: false
 tags: inventory
 date: 2024-07-26T10:31:00.000Z
