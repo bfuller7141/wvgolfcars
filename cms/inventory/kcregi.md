@@ -1,28 +1,29 @@
 ---
-f_sold: false
-f_fuel-type: Electric
-f_passengers: 2
-f_condition: Used
+title: 1998 Club Car
+created-on: 2024-07-01T15:05:53.294Z
+updated-on: 2024-07-01T15:11:23.440Z
+published-on: 2024-07-01T15:20:38.454Z
+f_make: Club Car
+f_model: DS
 f_year: 1998
 f_color: White
 f_price: $3,800
-f_model: DS
-title: 1998 Club Car
-f_make: Club Car
+f_passengers: 2
+f_condition: Used
 f_thumbnail:
-  url: >-
-    https://uploads-ssl.webflow.com/666b2f6de81b7bad5b3e8b1e/6682c2767517810ea39009fb_coming-soon.webp
+  url: /assets/images/img_0049-2-.heic
   alt: null
-f_images:
-  - url: >-
-      https://uploads-ssl.webflow.com/666b2f6de81b7bad5b3e8b1e/6682c2767517810ea39009fb_coming-soon.webp
-    alt: null
+layout: "[inventory].html"
 slug: kcregi
-updated-on: '2024-07-01T15:11:23.440Z'
-created-on: '2024-07-01T15:05:53.294Z'
-published-on: '2024-07-01T15:20:38.454Z'
-layout: '[inventory].html'
+f_fuel-type: Electric
+f_images:
+  - url: /assets/images/img_0049-2-.heic
+    alt: null
+  - url: /assets/images/img_0050-2-.heic
+  - url: /assets/images/img_0051-2-.heic
+f_sold: false
 tags: inventory
+date: 2024-07-26T10:31:00.000Z
 ---
 
 Discover the 1998 White Club Car DS, a clean and reliable cart designed for both golf courses and street use. With custom upholstery and a robust 48-volt system, this cart offers a smooth ride at speeds up to 19 mph.
