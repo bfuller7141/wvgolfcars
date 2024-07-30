@@ -11,7 +11,7 @@ f_price: $3,800
 f_passengers: 4
 f_condition: Used
 f_thumbnail:
-  url: /assets/images/img_0049-2-.heic
+  url: /assets/images/img_0050-1-.heic
   alt: null
 layout: "[inventory].html"
 slug: bphdea
@@ -22,6 +22,7 @@ f_images:
   - url: /assets/images/img_0049-2-.heic
   - url: /assets/images/img_0050-2-.heic
   - url: /assets/images/img_0051-2-.heic
+  - {}
 f_sold: false
 tags: inventory
 date: 2024-07-26T10:37:00.000Z
